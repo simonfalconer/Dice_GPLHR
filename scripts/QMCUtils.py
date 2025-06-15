@@ -1066,6 +1066,10 @@ def run_afqmc_mf(mf,
                   chol[i, m, n] = chol0[i, triind]
                   chol[i, n, m] = chol0[i, triind]
 
+      h1e = mo_coeff.T @ h1e @ mo_coeff
+      for gamma in range(nchol):
+          chol[gamma] = mo_coeff.T @ chol[gamma] @ mo_coeff
+
     else:
       h1e, chol, nelec, enuc = generate_integrals(mol, mf.get_hcore(), mo_coeff, chol_cut)
       nbasis = h1e.shape[-1]
@@ -1253,6 +1257,10 @@ def run_afqmc_mc(mc,
                   triind = m * (m + 1) // 2 + n
                   chol[i, m, n] = chol0[i, triind]
                   chol[i, n, m] = chol0[i, triind]
+
+      h1e = mo_coeff.T @ h1e @ mo_coeff
+      for gamma in range(nchol):
+          chol[gamma] = mo_coeff.T @ chol[gamma] @ mo_coeff
 
     else:
       h1e, chol, nelec, enuc = generate_integrals(mol, mc.get_hcore(), mo_coeff, chol_cut)

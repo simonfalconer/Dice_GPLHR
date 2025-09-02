@@ -1164,7 +1164,10 @@ vector<double> SHCIbasics::DoVariational(vector<MatrixXx> &ci,
     int numIter = 0;
 
     // do the davidson calculation
-    if (schd.DavidsonType == DIRECT)
+    if (schd.davidsonShift != 0.0)
+      E0 = davidsonShifted(H, X0, diag, schd.nroots + 4, schd.davidsonTolLoose,
+                    numIter, schd.outputlevel > 0, schd.davidsonShift - coreEbkp);
+    else if (schd.DavidsonType == DIRECT)
       E0 = davidsonDirect(Hdirect, X0, diag, schd.nroots + 2,
                           schd.davidsonTolLoose, numIter, schd.outputlevel > 0);
     else
@@ -1203,7 +1206,10 @@ vector<double> SHCIbasics::DoVariational(vector<MatrixXx> &ci,
       pout << "Performing final tight davidson with tol: " << schd.davidsonTol
            << endl;
 
-      if (schd.DavidsonType == DIRECT)
+      if (schd.davidsonShift != 0.0)
+        E0 = davidsonShifted(H, ci, diag, schd.nroots + 4,
+                            schd.davidsonTol, numIter, false, schd.davidsonShift - coreEbkp);
+      else if (schd.DavidsonType == DIRECT)
         E0 = davidsonDirect(Hdirect, ci, diag, schd.nroots + 4,
                             schd.davidsonTol, numIter, true);
       else

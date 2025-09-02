@@ -310,7 +310,10 @@ int main(int argc, char* argv[]) {
     double E = Dets.at(d).Energy(I1, I2, coreE);
     pout << Dets[d] << " Given Ref. Energy:    "
          << format("%18.10f") % (E) << endl;
-    if (E < lowestEnergy) {
+    if (abs(E - schd.davidsonShift) < abs(lowestEnergy - schd.davidsonShift) && schd.davidsonShift != 0.0) {
+      lowestEnergy = E;
+      lowestEnergyDet = d;
+    } else if (E < lowestEnergy && schd.davidsonShift == 0.0) {
       lowestEnergy = E;
       lowestEnergyDet = d;
     }

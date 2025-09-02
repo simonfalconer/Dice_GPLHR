@@ -32,6 +32,11 @@ using namespace std;
 
 void precondition(MatrixXx& r, MatrixXx& diag, double& e);
 
+void sortEigenpairs(VectorXd& eigenvalues, MatrixXd& eigenvectors, double shift);
+
+vector<double> davidsonShifted(Hmult2& H, vector<MatrixXx>& x0, MatrixXx& diag,
+                int maxCopies, double tol, int& numIter, bool print, double shift);
+
 vector<double> davidson(Hmult2& H, vector<MatrixXx>& x0, MatrixXx& diag,
                         int maxCopies, double tol, int& numIter, bool print);
 

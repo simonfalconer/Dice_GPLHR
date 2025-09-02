@@ -42,6 +42,7 @@ struct schedule {
     ar & davidsonTol                          \
     & davidsonTolLoose                        \
     & RdmType                                 \
+    & davidsonShift                           \
     & DavidsonType                            \
     & epsilon2                                \
     & epsilon2Large                           \
@@ -116,6 +117,7 @@ struct schedule {
   double davidsonTol;
   double davidsonTolLoose;
   rdmType RdmType;
+  double davidsonShift;
   davidsonType DavidsonType;
   double epsilon2;
   double epsilon2Large;

@@ -55,6 +55,7 @@ void readInput(string input, std::vector<std::vector<int> >& occupied,
   schd.davidsonTolLoose = 5.e-5;
   schd.RdmType = RELAXED;
   schd.DavidsonType = MEMORY;
+  schd.davidsonShift = 0.0;
   schd.epsilon2 = 1.e-8;
   schd.epsilon2Large = 1000.0;
   schd.SampleN = -1;
@@ -184,6 +185,8 @@ void readInput(string input, std::vector<std::vector<int> >& occupied,
       schd.DavidsonType = DIRECT;
     else if (boost::iequals(ArgName, "diskdavidson"))
       schd.DavidsonType = DISK;
+    else if (boost::iequals(ArgName, "shifteddavidson"))
+      schd.davidsonShift = atof(tok[1].c_str());
     else if (boost::iequals(ArgName, "relaxedRDM"))
       schd.RdmType = UNRELAXED;
     else if (boost::iequals(ArgName, "num_thrds"))
